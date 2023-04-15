@@ -8,13 +8,16 @@ public class EntityAnalysisFrameworkImpl implements EntityAnalysisFramework {
 
     }
 
+    /**
+     * Registers a new {@link DataPlugin} with the framework
+     */
     public void registerDataPlugin(DataPlugin plugin) {
         plugin.onRegister(this);
         registeredDataPlugin = plugin;
     }
 
     /**
-     * Registers a new {@link GamePlugin} with the game framework
+     * Registers a new {@link VisualizationPlugin} with the framework
      */
     public void registerVisPlugin(VisualizationPlugin plugin) {
         plugin.onRegister(this);
