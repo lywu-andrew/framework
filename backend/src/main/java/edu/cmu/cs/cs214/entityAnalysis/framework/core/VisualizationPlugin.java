@@ -16,4 +16,14 @@ public interface VisualizationPlugin {
      */
     String visualizeData(AnalysisResult analysisResult);
 
+    /**
+     * Called (only once) when the plug-in is first registered with the
+     * framework, giving the plug-in a chance to perform any initial set-up
+     * before the game has begun (if necessary).
+     *
+     * @param framework The {@link EntityAnalysisFramework} instance with which
+     *                  the plug-in was registered.
+     */
+    void onRegister(EntityAnalysisFramework framework);
+    
 }
