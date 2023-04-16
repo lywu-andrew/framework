@@ -1,8 +1,13 @@
 package edu.cmu.cs214.hw6.framework.core;
 
+import java.util.List;
+
+import edu.cmu.cs214.hw6.framework.core.types.Text;
+
 public class ESAFrameworkImpl implements ESAFramework {
     private DataPlugin registeredDataPlugin;
     private VisualizationPlugin registeredVisPlugin;
+    private List<Text> texts;
     
     public ESAFrameworkImpl() {
 
