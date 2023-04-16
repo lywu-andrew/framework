@@ -1,8 +1,8 @@
-package main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core;
+package edu.cmu.cs214.hw6.framework.core;
 
 import java.util.List;
 
-import main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core.types.Text;
+import edu.cmu.cs214.hw6.framework.core.types.Text;
 
 public interface DataPlugin {
 
@@ -24,6 +24,6 @@ public interface DataPlugin {
      * @param framework The {@link ESAFramework} instance with which
      *                  the plug-in was registered.
      */
-    void onRegister(ESAFramework framework);
+    void onRegister(ESAFrameworkImpl framework);
 
 }

@@ -1,4 +1,4 @@
-package main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core;
+package edu.cmu.cs214.hw6.framework.core;
 
 public class ESAFrameworkImpl implements ESAFramework {
     private DataPlugin registeredDataPlugin;

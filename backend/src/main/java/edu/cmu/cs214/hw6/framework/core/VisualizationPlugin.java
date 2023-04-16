@@ -1,6 +1,6 @@
-package main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core;
+package edu.cmu.cs214.hw6.framework.core;
 
-import main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core.types.AnalysisResult;
+import edu.cmu.cs214.hw6.framework.core.types.AnalysisResult;
 
 public interface VisualizationPlugin {
 
