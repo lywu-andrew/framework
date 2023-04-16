@@ -1,8 +1,8 @@
-package main.java.edu.cmu.cs.cs214.entityAnalysis.framework.core;
+package main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core;
 
 import java.util.List;
 
-import main.java.edu.cmu.cs.cs214.entityAnalysis.framework.core.types.Text;
+import main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core.types.Text;
 
 public interface DataPlugin {
 
@@ -21,9 +21,9 @@ public interface DataPlugin {
      * framework, giving the plug-in a chance to perform any initial set-up
      * before the game has begun (if necessary).
      *
-     * @param framework The {@link EntityAnalysisFramework} instance with which
+     * @param framework The {@link ESAFramework} instance with which
      *                  the plug-in was registered.
      */
-    void onRegister(EntityAnalysisFramework framework);
-    
+    void onRegister(ESAFramework framework);
+
 }

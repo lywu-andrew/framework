@@ -1,10 +1,10 @@
-package main.java.edu.cmu.cs.cs214.entityAnalysis.framework.core;
+package main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core;
 
-public class EntityAnalysisFrameworkImpl implements EntityAnalysisFramework {
+public class ESAFrameworkImpl implements ESAFramework {
     private DataPlugin registeredDataPlugin;
     private VisualizationPlugin registeredVisPlugin;
     
-    public EntityAnalysisFrameworkImpl() {
+    public ESAFrameworkImpl() {
 
     }
 

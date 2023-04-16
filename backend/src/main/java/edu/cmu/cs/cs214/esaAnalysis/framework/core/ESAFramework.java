@@ -1,6 +1,6 @@
-package main.java.edu.cmu.cs.cs214.entityAnalysis.framework.core;
+package main.java.edu.cmu.cs.cs214.esaAnalysis.framework.core;
 
-public interface EntityAnalysisFramework {
+public interface ESAFramework {
 
     /**
      * Upload all of the files in the given local directory path.
