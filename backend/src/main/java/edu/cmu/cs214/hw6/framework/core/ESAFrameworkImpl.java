@@ -3,19 +3,8 @@ package edu.cmu.cs214.hw6.framework.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.cloud.language.v1.AnalyzeEntitiesRequest;
-import com.google.cloud.language.v1.AnalyzeEntitiesResponse;
 import com.google.cloud.language.v1.AnalyzeEntitySentimentRequest;
 import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
-import com.google.cloud.language.v1.AnalyzeSentimentResponse;
-import com.google.cloud.language.v1.AnalyzeSyntaxRequest;
-import com.google.cloud.language.v1.AnalyzeSyntaxResponse;
-import com.google.cloud.language.v1.ClassificationCategory;
-import com.google.cloud.language.v1.ClassificationModelOptions;
-import com.google.cloud.language.v1.ClassificationModelOptions.V2Model;
-import com.google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion;
-import com.google.cloud.language.v1.ClassifyTextRequest;
-import com.google.cloud.language.v1.ClassifyTextResponse;
 import com.google.cloud.language.v1.Document;
 import com.google.cloud.language.v1.Document.Type;
 
