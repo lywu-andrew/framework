@@ -29,8 +29,10 @@ import com.google.cloud.language.v1.Sentiment;
 import com.google.cloud.language.v1.Token;
 
 public class ESAFrameworkImpl implements ESAFramework {
-    private DataPlugin registeredDataPlugin;
-    private VisualizationPlugin registeredVisPlugin;
+    private List<DataPlugin> registeredDataPlugins;
+    private DataPlugin currDataPlugin;
+    private List<VisualizationPlugin> registeredVisPlugins;
+    private VisualizationPlugin currVisPlugin;
     
     public ESAFrameworkImpl() {
 
@@ -41,7 +43,7 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     public void registerDataPlugin(DataPlugin plugin) {
         plugin.onRegister(this);
-        registeredDataPlugin = plugin;
+        registeredDataPlugins.add(plugin);
     }
 
     /**
@@ -49,7 +51,7 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     public void registerVisPlugin(VisualizationPlugin plugin) {
         plugin.onRegister(this);
-        registeredVisPlugin = plugin;
+        registeredVisPlugins.add(plugin);
     }
 
     /**
