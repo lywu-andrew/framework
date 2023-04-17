@@ -3,6 +3,9 @@ package edu.cmu.cs214.hw6.framework.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import java.io.IOException;
+
 import com.google.cloud.language.v1.AnalyzeEntitySentimentRequest;
 import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
 import com.google.cloud.language.v1.Document;
@@ -22,9 +25,10 @@ public class ESAFrameworkImpl implements ESAFramework {
     private DataPlugin currDataPlugin;
     private List<VisualizationPlugin> registeredVisPlugins;
     private VisualizationPlugin currVisPlugin;
+    private List<Text> texts;
     
     public ESAFrameworkImpl() {
-
+        texts = new ArrayList<Text>();
     }
 
     /**
@@ -47,8 +51,14 @@ public class ESAFrameworkImpl implements ESAFramework {
      * Source: https://www.tutorialspoint.com/how-to-read-data-from-all-files-in-a-directory-using-java
      */
     @Override
-    public void uploadData(String directoryPath) {
-        
+    public void uploadData(String directoryPathStr) {
+        // Creating a File object for directory
+        File directoryPath = new File(directoryPathStr);
+        // List of all files and directories
+        File filesList[] = directoryPath.listFiles();
+        for (File file : filesList) {
+            texts.add(currDataPlugin.convertToText(file.getAbsolutePath()));
+        }
     }
 
     @Override

@@ -17,6 +17,11 @@ public interface DataPlugin {
     List<Text> getTexts();
 
     /**
+     * Convert the file at the given path to a Text object.
+     */
+    Text convertToText(String filePath);
+
+    /**
      * Called (only once) when the plug-in is first registered with the
      * framework, giving the plug-in a chance to perform any initial set-up
      * before the game has begun (if necessary).
