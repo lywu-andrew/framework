@@ -64,7 +64,8 @@ public class ESAFrameworkImpl implements ESAFramework {
     }
 
     @Override
-    public String getAnalyzedVisualization() {
+    public String getAnalyzedVisualization() throws Exception {
+        List<AnalyzeEntitySentimentResponse> responses = analyzeTexts();
         return null;
     }
 
@@ -75,7 +76,7 @@ public class ESAFrameworkImpl implements ESAFramework {
      * @return A list of API responses
      * @throws Exception
      */
-    private List<AnalyzeEntitySentimentResponse> analyzeTexts(List<Text> texts) throws Exception {
+    private List<AnalyzeEntitySentimentResponse> analyzeTexts() throws Exception {
         List<AnalyzeEntitySentimentResponse> responses = new ArrayList<>();
         for (Text text : texts) {
             responses.add(getESA(text.getContent()));

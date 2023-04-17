@@ -16,7 +16,8 @@ public interface ESAFramework {
      * Conduct the entity-sentiment analysis and get the visualization.
      * 
      * @return An HTML string of the generated visualization
+     * @throws Exception
      */
-    String getAnalyzedVisualization();
+    String getAnalyzedVisualization() throws Exception;
 
 }
