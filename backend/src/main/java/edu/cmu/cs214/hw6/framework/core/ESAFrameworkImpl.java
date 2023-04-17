@@ -28,6 +28,8 @@ public class ESAFrameworkImpl implements ESAFramework {
     private List<Text> texts;
     
     public ESAFrameworkImpl() {
+        registeredVisPlugins = new ArrayList<VisualizationPlugin>();
+        registeredDataPlugins = new ArrayList<DataPlugin>();
         texts = new ArrayList<Text>();
     }
 
