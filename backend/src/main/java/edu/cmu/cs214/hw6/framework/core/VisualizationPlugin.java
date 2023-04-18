@@ -1,5 +1,6 @@
 package edu.cmu.cs214.hw6.framework.core;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
@@ -14,9 +15,10 @@ public interface VisualizationPlugin {
     /**
      * Visualizes the given data using the visualization type.
      * @param data The results of entity sentiment analysis
-     * @return An HTML string of the generated visualization
+     * @return File path to visualization image file
+     * @throws IOException
      */
-    String visualizeData(List<AnalyzeEntitySentimentResponse> result);
+    String visualizeData(List<AnalyzeEntitySentimentResponse> result) throws IOException;
 
     /**
      * Called (only once) when the plug-in is first registered with the
