@@ -41,7 +41,7 @@ jobs:
         id: change-java
         with:
           files: |
-            pom.xml
+            backend/pom.xml
             **/*.java
 
       # Runs type checker for Java files
