@@ -5,8 +5,10 @@ import java.util.List;
 import edu.cmu.cs214.hw6.framework.core.types.Text;
 
 public class ESAFrameworkImpl implements ESAFramework {
-    private DataPlugin registeredDataPlugin;
-    private VisualizationPlugin registeredVisPlugin;
+    private List<DataPlugin> registeredDataPlugins;
+    private DataPlugin currDataPlugin;
+    private List<VisualizationPlugin> registeredVisPlugins;
+    private VisualizationPlugin currVisPlugin;
     private List<Text> texts;
     
     public ESAFrameworkImpl() {
@@ -18,7 +20,7 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     public void registerDataPlugin(DataPlugin plugin) {
         plugin.onRegister(this);
-        registeredDataPlugin = plugin;
+        registeredDataPlugins.add(plugin);
     }
 
     /**
@@ -26,7 +28,7 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     public void registerVisPlugin(VisualizationPlugin plugin) {
         plugin.onRegister(this);
-        registeredVisPlugin = plugin;
+        registeredVisPlugins.add(plugin);
     }
 
     /**
@@ -38,7 +40,7 @@ public class ESAFrameworkImpl implements ESAFramework {
     }
 
     @Override
-    public String getAnalyzedVisualization() {
+    public String getAnalyzedVisualization() throws Exception {
         return null;
     }
 }
