@@ -1,6 +1,8 @@
 package edu.cmu.cs214.hw6.framework.core;
 
-import edu.cmu.cs214.hw6.framework.core.types.AnalysisResult;
+import java.util.List;
+
+import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
 
 public interface VisualizationPlugin {
 
@@ -14,7 +16,7 @@ public interface VisualizationPlugin {
      * @param data The results of entity sentiment analysis
      * @return An HTML string of the generated visualization
      */
-    String visualizeData(AnalysisResult analysisResult);
+    String visualizeData(List<AnalyzeEntitySentimentResponse> result);
 
     /**
      * Called (only once) when the plug-in is first registered with the

@@ -1,5 +1,7 @@
 package edu.cmu.cs214.hw6.framework.core;
 
+import java.io.IOException;
+
 public interface ESAFramework {
 
     /**
@@ -10,7 +12,7 @@ public interface ESAFramework {
      * 
      * @param string The path to the local directory containing the data
      */
-    void uploadData(String directoryPath);
+    void uploadData(String directoryPath) throws IOException;
 
     /**
      * Conduct the entity-sentiment analysis and get the visualization.
