@@ -1,16 +1,34 @@
 package edu.cmu.cs214.hw6.framework.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import edu.cmu.cs214.hw6.framework.core.types.Text;
+import java.io.File;
+import java.io.IOException;
+
+import com.google.cloud.language.v1.AnalyzeEntitySentimentRequest;
+import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.Document.Type;
+
+import com.google.cloud.language.v1.EncodingType;
+import com.google.cloud.language.v1.Entity;
+import com.google.cloud.language.v1.EntityMention;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
+import com.google.cloud.language.v1.Token;
 
 public class ESAFrameworkImpl implements ESAFramework {
-    private DataPlugin registeredDataPlugin;
-    private VisualizationPlugin registeredVisPlugin;
-    private List<Text> texts;
+    private List<DataPlugin> registeredDataPlugins;
+    private DataPlugin currDataPlugin;
+    private List<VisualizationPlugin> registeredVisPlugins;
+    private VisualizationPlugin currVisPlugin;
+    private List<String> texts;
     
     public ESAFrameworkImpl() {
-
+        registeredVisPlugins = new ArrayList<VisualizationPlugin>();
+        registeredDataPlugins = new ArrayList<DataPlugin>();
+        texts = new ArrayList<String>();
     }
 
     /**
@@ -18,7 +36,7 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     public void registerDataPlugin(DataPlugin plugin) {
         plugin.onRegister(this);
-        registeredDataPlugin = plugin;
+        registeredDataPlugins.add(plugin);
     }
 
     /**
@@ -26,19 +44,82 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     public void registerVisPlugin(VisualizationPlugin plugin) {
         plugin.onRegister(this);
-        registeredVisPlugin = plugin;
+        registeredVisPlugins.add(plugin);
     }
 
     /**
      * Source: https://www.tutorialspoint.com/how-to-read-data-from-all-files-in-a-directory-using-java
+     * @throws IOException
      */
     @Override
-    public void uploadData(String directoryPath) {
-        
+    public void uploadData(String directoryPathStr) throws IOException {
+        // Creating a File object for directory
+        File directoryPath = new File(directoryPathStr);
+        // List of all files and directories
+        File filesList[] = directoryPath.listFiles();
+        for (File file : filesList) {
+            texts.add(currDataPlugin.convertToString(file.toPath()));
+        }
     }
 
     @Override
-    public String getAnalyzedVisualization() {
+    public String getAnalyzedVisualization() throws Exception {
+        List<AnalyzeEntitySentimentResponse> responses = analyzeTexts();
         return null;
+    }
+
+    /**
+     * For a list of Texts, get the entity sentiment API responses.
+     * 
+     * @param texts A list of Text objects
+     * @return A list of API responses
+     * @throws Exception
+     */
+    private List<AnalyzeEntitySentimentResponse> analyzeTexts() throws Exception {
+        List<AnalyzeEntitySentimentResponse> responses = new ArrayList<>();
+        for (String text : texts) {
+            responses.add(getESA(text));
+        }
+        return responses;
+    }
+
+    /**
+     * Detect the entity sentiments of the given text using the Google Cloud
+     * Language Beta API.
+     * 
+     * Sources: 
+     * https://cloud.google.com/natural-language/docs/analyzing-entity-sentiment
+     * https://github.com/GoogleCloudPlatform/java-docs-samples/blob/HEAD/language/snippets/src/main/java/com/example/language/Analyze.java
+     * 
+     * @param text A String input text to analyze
+     * @throws Exception
+     */
+    private AnalyzeEntitySentimentResponse getESA(String text) throws Exception {
+        // Instantiate the Language client com.google.cloud.language.v1.LanguageServiceClient
+        try (LanguageServiceClient language = LanguageServiceClient.create()) {
+            Document doc = Document.newBuilder().setContent(text).setType(Type.PLAIN_TEXT).build();
+            AnalyzeEntitySentimentRequest request =
+                AnalyzeEntitySentimentRequest.newBuilder()
+                    .setDocument(doc)
+                    .setEncodingType(EncodingType.UTF16)
+                    .build();
+            // Detect entity sentiments in the given string
+            AnalyzeEntitySentimentResponse response = language.analyzeEntitySentiment(request);
+            return response;
+
+            // Print the response
+            // for (Entity entity : response.getEntitiesList()) {
+            //     System.out.printf("Entity: %s\n", entity.getName());
+            //     System.out.printf("Salience: %.3f\n", entity.getSalience());
+            //     System.out.printf("Sentiment : %s\n", entity.getSentiment());
+            //     for (EntityMention mention : entity.getMentionsList()) {
+            //         System.out.printf("Begin offset: %d\n", mention.getText().getBeginOffset());
+            //         System.out.printf("Content: %s\n", mention.getText().getContent());
+            //         System.out.printf("Magnitude: %.3f\n", mention.getSentiment().getMagnitude());
+            //         System.out.printf("Sentiment score : %.3f\n", mention.getSentiment().getScore());
+            //         System.out.printf("Type: %s\n\n", mention.getType());
+            //     }
+            // }
+        }
     }
 }

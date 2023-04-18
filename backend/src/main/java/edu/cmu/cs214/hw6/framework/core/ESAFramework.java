@@ -1,5 +1,7 @@
 package edu.cmu.cs214.hw6.framework.core;
 
+import java.io.IOException;
+
 public interface ESAFramework {
 
     /**
@@ -9,14 +11,16 @@ public interface ESAFramework {
      * handled by the registered data plugin.
      * 
      * @param string The path to the local directory containing the data
+     * @throws IOException
      */
-    void uploadData(String directoryPath);
+    void uploadData(String directoryPath) throws IOException;
 
     /**
      * Conduct the entity-sentiment analysis and get the visualization.
      * 
      * @return An HTML string of the generated visualization
+     * @throws Exception
      */
-    String getAnalyzedVisualization();
+    String getAnalyzedVisualization() throws Exception;
 
 }

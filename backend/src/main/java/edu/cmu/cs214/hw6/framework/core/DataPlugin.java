@@ -1,8 +1,7 @@
 package edu.cmu.cs214.hw6.framework.core;
 
-import java.util.List;
-
-import edu.cmu.cs214.hw6.framework.core.types.Text;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public interface DataPlugin {
 
@@ -12,9 +11,10 @@ public interface DataPlugin {
     String getPluginName();
 
     /**
-     * Gets a list of the texts.
+     * Convert the file at the given path to a String.
+     * @throws IOException
      */
-    List<Text> getTexts();
+    String convertToString(Path filePath) throws IOException;
 
     /**
      * Called (only once) when the plug-in is first registered with the
@@ -24,6 +24,6 @@ public interface DataPlugin {
      * @param framework The {@link ESAFramework} instance with which
      *                  the plug-in was registered.
      */
-    void onRegister(ESAFrameworkImpl framework);
+    void onRegister(ESAFramework framework);
 
 }
