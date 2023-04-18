@@ -18,6 +18,16 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <repositories>
+    <repository>
+        <id>snowtide-releases</id>
+        <url>https://maven.snowtide.com/releases</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+    </repository>
+  </repositories>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -34,6 +44,11 @@
     <dependency>
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-language</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.snowtide</groupId>
+      <artifactId>pdfxstream</artifactId>
+      <version>3.9.5</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
