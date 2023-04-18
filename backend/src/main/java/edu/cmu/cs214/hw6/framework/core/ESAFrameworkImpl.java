@@ -11,8 +11,6 @@ import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
 import com.google.cloud.language.v1.Document;
 import com.google.cloud.language.v1.Document.Type;
 
-import edu.cmu.cs214.hw6.framework.core.types.Text;
-
 import com.google.cloud.language.v1.EncodingType;
 import com.google.cloud.language.v1.Entity;
 import com.google.cloud.language.v1.EntityMention;
@@ -25,12 +23,12 @@ public class ESAFrameworkImpl implements ESAFramework {
     private DataPlugin currDataPlugin;
     private List<VisualizationPlugin> registeredVisPlugins;
     private VisualizationPlugin currVisPlugin;
-    private List<Text> texts;
+    private List<String> texts;
     
     public ESAFrameworkImpl() {
         registeredVisPlugins = new ArrayList<VisualizationPlugin>();
         registeredDataPlugins = new ArrayList<DataPlugin>();
-        texts = new ArrayList<Text>();
+        texts = new ArrayList<String>();
     }
 
     /**
@@ -51,15 +49,16 @@ public class ESAFrameworkImpl implements ESAFramework {
 
     /**
      * Source: https://www.tutorialspoint.com/how-to-read-data-from-all-files-in-a-directory-using-java
+     * @throws IOException
      */
     @Override
-    public void uploadData(String directoryPathStr) {
+    public void uploadData(String directoryPathStr) throws IOException {
         // Creating a File object for directory
         File directoryPath = new File(directoryPathStr);
         // List of all files and directories
         File filesList[] = directoryPath.listFiles();
         for (File file : filesList) {
-            texts.add(currDataPlugin.convertToText(file.getAbsolutePath()));
+            texts.add(currDataPlugin.convertToString(file.toPath()));
         }
     }
 
@@ -78,8 +77,8 @@ public class ESAFrameworkImpl implements ESAFramework {
      */
     private List<AnalyzeEntitySentimentResponse> analyzeTexts() throws Exception {
         List<AnalyzeEntitySentimentResponse> responses = new ArrayList<>();
-        for (Text text : texts) {
-            responses.add(getESA(text.getContent()));
+        for (String text : texts) {
+            responses.add(getESA(text));
         }
         return responses;
     }
