@@ -29,8 +29,8 @@ public class PieChartPlugin implements VisualizationPlugin {
     }
 
     /**
-     * Visualizes the given data using the visualization type.
-     * @param data The results of entity sentiment analysis
+     * Visualizes the sentiment magnitudes of all entities using a pie chart.
+     * @param responses The results of entity sentiment analysis
      * @return File path to visualization image file
      * @throws IOException
      */
@@ -45,9 +45,10 @@ public class PieChartPlugin implements VisualizationPlugin {
             }
         }
         JFreeChart pieChart = ChartFactory.createPieChart("Entity Sentiment Magnitude", dataset);
-        File imgFile = new File(String.join("", "../charts/", PLUGIN_NAME, ".jpeg"));
+        String path = "src/main/java/edu/cmu/cs214/hw6/plugin/charts/";
+        File imgFile = new File(String.join("", path, PLUGIN_NAME, ".jpeg"));
         ChartUtils.saveChartAsJPEG(imgFile, pieChart, 600, 400);
-        return imgFile.getPath();
+        return String.join("", path, imgFile.getName());
     }
 
     /**

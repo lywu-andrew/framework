@@ -1,4 +1,4 @@
-package edu.cmu.cs214.hw6;
+package edu.cmu.cs214.hw6.data;
 
 import org.junit.Before;
 import org.junit.Rule;

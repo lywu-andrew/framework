@@ -29,8 +29,8 @@ public class BarChartPlugin implements VisualizationPlugin {
     }
 
     /**
-     * Visualizes the given data using the visualization type.
-     * @param data The results of entity sentiment analysis
+     * Visualizes the salience scores of all entities using a bar graph.
+     * @param responses The results of entity sentiment analysis
      * @return File path to visualization image file
      * @throws IOException
      */
@@ -43,9 +43,10 @@ public class BarChartPlugin implements VisualizationPlugin {
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Entity Salience", "Entities", "Salience value", dataset);
-        File imgFile = new File(String.join("", "../charts/", PLUGIN_NAME, ".jpeg"));
+        String path = "src/main/java/edu/cmu/cs214/hw6/plugin/charts/";
+        File imgFile = new File(String.join("", path, PLUGIN_NAME, ".jpeg"));
         ChartUtils.saveChartAsJPEG(imgFile, barChart, 600, 400);
-        return imgFile.getPath();
+        return String.join("", path, imgFile.getName());
     }
 
     /**
