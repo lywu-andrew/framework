@@ -44,6 +44,14 @@ public class App extends NanoHTTPD {
             // e.g., /selectVis?i=i
             framework.selectVisPlugin(Integer.parseInt(params.get("i")));
         }
+        if (framework.getCurrDataPlugin() != null && framework.getCurrVisPlugin() != null) {
+            try {
+                framework.uploadData("."); // how to input text directory
+                framework.getAnalyzedVisualization();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         AppState state = AppState.forApp(this.framework);
         return newFixedLengthResponse(state.toString());
     }
