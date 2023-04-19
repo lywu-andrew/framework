@@ -16,9 +16,15 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit tests for BarChartPlugin
+ * 
+ * This test file mainly tests BarChartPlugin.visualizeData(responses). We mock API responses
+ * using Mockito mock for the API objects and confirm the resulting visualization image file exists.
+ */
 public class BarChartPluginTest {
 
-    private BarChartPlugin plugin;
+    private BarChartPlugin plugin; // This sample plugin visualizes entities with their salience scores.
     private List<AnalyzeEntitySentimentResponse> responses;
 
     @Before
@@ -43,11 +49,13 @@ public class BarChartPluginTest {
         eList1.add(e4);
         when(r2.getEntitiesList()).thenReturn(eList2);
 
+        // random entity name values
         when(e1.getName()).thenReturn("fun");
         when(e2.getName()).thenReturn("games");
         when(e3.getName()).thenReturn("hi");
         when(e4.getName()).thenReturn("bye");
 
+        // random salience score values
         when(e1.getSalience()).thenReturn((float)1.0);
         when(e2.getSalience()).thenReturn((float)0.2);
         when(e3.getSalience()).thenReturn((float)0.31);

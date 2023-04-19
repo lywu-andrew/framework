@@ -17,9 +17,15 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit tests for PieChartPlugin
+ * 
+ * This test file mainly tests PieChartPlugin.visualizeData(responses). We mock API responses
+ * using Mockito mock for the API objects and confirm the resulting visualization image file exists.
+ */
 public class PieChartPluginTest {
 
-    private PieChartPlugin plugin;
+    private PieChartPlugin plugin; // This sample plugin visualizes entities with their sentiment magnitudes.
     private List<AnalyzeEntitySentimentResponse> responses;
 
     @Before
@@ -44,6 +50,7 @@ public class PieChartPluginTest {
         eList1.add(e4);
         when(r2.getEntitiesList()).thenReturn(eList2);
 
+        // random entity name values
         when(e1.getName()).thenReturn("fun");
         when(e2.getName()).thenReturn("games");
         when(e3.getName()).thenReturn("hi");
@@ -58,6 +65,7 @@ public class PieChartPluginTest {
         Sentiment s4 = mock(Sentiment.class);
         when(e4.getSentiment()).thenReturn(s4);
 
+        // random sentiment magnitude values
         when(s1.getMagnitude()).thenReturn((float)0.9);
         when(s2.getMagnitude()).thenReturn((float)0.2);
         when(s3.getMagnitude()).thenReturn((float)0.31);
