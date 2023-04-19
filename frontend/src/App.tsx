@@ -42,51 +42,43 @@ class App extends React.Component<Props, State> {
    * otherwise, 'this' would become undefined in runtime. This is
    * just an issue of Javascript.
    */
-  newGame = async () => {
-    const response = await fetch('/newgame');
+  newApp = async () => {
+    const response = await fetch('/newapp');
     const json = await response.json();
     this.setState(json);
   }
 
   /**
-   * pickCard will generate an anonymous function that the component
-   * can bind with.
-   * @param x 
-   * @param y 
-   * @returns 
-   */
-  pickCard(i: number): React.MouseEventHandler {
-    return async (e) => {
-      // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
-      e.preventDefault();
-      const response = await fetch(`/pickcard?i=${i}`)
-      const json = await response.json();
-      this.setState(json);
-    }
-  }
-
-  /**
    * play will generate an anonymous function that the component
    * can bind with.
-   * @param x 
-   * @param y 
+   * @param i
    * @returns 
    */
-  play(i: number): React.MouseEventHandler {
-    return async (e) => {
-      // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
-      e.preventDefault();
-      const response = await fetch(`/play?x=${x}&y=${y}`)
-      const json = await response.json();
-      this.setState(json);
+  play(i: number, type: string): React.MouseEventHandler {
+    if (type === 'data') {
+      return async (e) => {
+        // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
+        e.preventDefault();
+        const response = await fetch(`/selectData?i=${i}`)
+        const json = await response.json();
+        this.setState(json);
+      }
+    } else {
+      return async (e) => {
+        // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
+        e.preventDefault();
+        const response = await fetch(`/selectVis?i=${i}`)
+        const json = await response.json();
+        this.setState(json);
+      }
     }
   }
 
-  createCell(cell: Cell, index: number): React.ReactNode {
+  createCell(cell: Cell, index: number, type: string): React.ReactNode {
     if (cell.selected)
       return (
         <div key={index}>
-          <a href='/' onClick={this.play(cell.i)}>
+          <a href='/' onClick={this.play(cell.i, type)}>
             <BoardCell cell={cell}></BoardCell>
           </a>
         </div>
@@ -94,6 +86,13 @@ class App extends React.Component<Props, State> {
     else
       return (
         <div key={index}><BoardCell cell={cell}></BoardCell></div>
+      )
+  }
+
+  getImage() : React.ReactNode {
+      if (this.state.imgPath == null) return;
+      else return (
+        <img className="visualization" src={require("../../backend" + this.state.imgPath)} alt={"visualization"}></img>
       )
   }
 
@@ -108,7 +107,7 @@ class App extends React.Component<Props, State> {
      * this function to be invoked twice. Use initialized to avoid that.
      */
     if (!this.initialized) {
-      this.newGame();
+      this.newApp();
       this.initialized = true;
     }
   }
@@ -126,18 +125,17 @@ class App extends React.Component<Props, State> {
      */
     return (
       <div>
-        <div id="instructions">{this.state.instruction}</div>
-        <div id="board">
-          {this.state.cells.map((cell, i) => this.createCell(cell, i))}
+        <div id="left-bar">
+          {this.state.dataCells.map((cell, i) => this.createCell(cell, i, 'data'))}
         </div>
-        <div id="cardbar">
-          <button onClick={this.pickCard(0)}>Demeter</button>
-          <button onClick={this.pickCard(1)}>Minotaur</button>
-          <button onClick={this.pickCard(2)}>Pan</button>
-          <button onClick={this.pickCard(3)}>Player</button>
+        <div id="right-bar">
+          {this.state.visCells.map((cell, i) => this.createCell(cell, i, 'vis'))}
         </div>
+        <div id="img">
+          {this.getImage()}
+        </div> 
         <div id="bottombar">
-          <button onClick={/* get the function, not call the function */this.newGame}>New Game</button>
+          <button onClick={/* get the function, not call the function */this.newApp}>New App</button>
         </div>
       </div>
     );

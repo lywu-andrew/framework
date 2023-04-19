@@ -52,7 +52,7 @@ public class ESAFrameworkImpl implements ESAFramework {
     }
 
     /**
-     * Changes the current {@link DataPlugin} in the framework
+     * Registers a new {@link DataPlugin} with the framework
      */
     public void registerDataPlugin(DataPlugin plugin) {
         plugin.onRegister(this);
@@ -60,21 +60,28 @@ public class ESAFrameworkImpl implements ESAFramework {
     }
 
     /**
-     * Registers a new {@link VisualizationPlugin} with the framework
+     * Changes the current {@link DataPlugin} in the framework
+     * 
+     * @param index The index for the desired dataPlugin in the list
      */
     public void selectDataPlugin(int index) {
         if (index < 0 || index >= registeredDataPlugins.size()) return;
         else currDataPlugin = registeredDataPlugins.get(index);
     }
 
-    /**
-     * Changes the current {@link VisualizationPlugin} in the framework
+    /*
+     * Registers a new {@link VisualizationPlugin} with the framework
      */
     public void registerVisPlugin(VisualizationPlugin plugin) {
         plugin.onRegister(this);
         registeredVisPlugins.add(plugin);
     }
 
+    /**
+     * Changes the current {@link VisualizationPlugin} in the framework
+     * 
+     * @param index The index for the desired visualizationPlugin in the list
+     */
     public void selectVisPlugin(int index) {
         if (index < 0 || index >= registeredVisPlugins.size()) return;
         else currVisPlugin = registeredVisPlugins.get(index);

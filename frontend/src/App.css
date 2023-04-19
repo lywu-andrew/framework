@@ -1,8 +1,9 @@
-#board {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
+#left-bar {
+  display: block;
   background-color: #2196F3;
-  padding: 10px
+  padding: 10px;
+  cursor: pointer;
+  width: 25%
 }
 
 .cell {
@@ -12,34 +13,36 @@
   font-size: 30px;
   height: 11vmin;
   text-align: center;
+  float: left;
 }
 
-#cardbar {
-  height: 5vh;
+#right-bar {
+  display: block;
+  background-color: #2196F3;
+  padding: 10px;
+  cursor: pointer;
+  width: 25%
+}
+
+.cell {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  height: 11vmin;
+  text-align: center;
+  float: right;
+}
+
+#img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
 }
 
 #bottombar {
   height: 5vh;
-}
-
-#instructions {
-  /* height: 5vh; */
-  background-color: white;
-  padding: 0px;
-  margin: 0px;
-  text-align: center;
-  border: 1px solid black;
-  font-size: 1.4em
-}
-
-#cardbar button {
-  width: 25%;
-  /* height: 100%; */
-  margin: 0;
-  padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
 }
 
 #bottombar button {
@@ -59,4 +62,4 @@ body {
   padding: 0;
 }
 
-.playable { background-color: red;}
+.selected { background-color: red;}

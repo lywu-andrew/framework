@@ -16,6 +16,24 @@ public interface ESAFramework {
     public String getImgPath();
 
     /**
+     * Changes the current {@link DataPlugin} in the framework
+     * 
+     * If the index is out of bounds, there will be no action
+     * 
+     * @param index The index for the desired dataPlugin in the list
+     */
+    public void selectDataPlugin(int index);
+
+    /**
+     * Changes the current {@link VisualizationPlugin} in the framework
+     * 
+     * If the index is out of bounds, there will be no action
+     * 
+     * @param index The index for the desired visualizationPlugin in the list
+     */
+    public void selectVisPlugin(int index);
+
+    /**
      * Upload all of the files in the given local directory path.
      * 
      * Note that this directory should contain only files that match the type
