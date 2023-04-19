@@ -67,19 +67,32 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 97%;
+  top: 98%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  font-size: 2vw;
+  font-size: 1.8vw;
   cursor: pointer;
 }
 
-#input {
+label {
+  font-size: 15px;
+  font-weight: 400;
+  position: absolute;
+  top: 92%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.input {
   padding: 3px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 400;
   width: 300px;
+  position: absolute;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 html,
