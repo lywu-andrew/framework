@@ -15,6 +15,22 @@ public interface ESAFramework {
 
     public String getImgPath();
 
+    public String getDirectoryPathStr();
+
+    /**
+     * Registers a new {@link DataPlugin} with the framework
+     * 
+     * @param plugin The DataPlugin to register
+     */
+    public void registerDataPlugin(DataPlugin plugin);
+
+    /**
+     * Registers a new {@link VisualizationPlugin} with the framework
+     * 
+     * @param plugin The VisualizationPlugin to register
+     */
+    public void registerVisPlugin(VisualizationPlugin plugin);
+
     /**
      * Changes the current {@link DataPlugin} in the framework
      * 
@@ -34,20 +50,20 @@ public interface ESAFramework {
     public void selectVisPlugin(int index);
 
     /**
-     * Upload all of the files in the given local directory path.
+     * Upload all of the files in the given local directory path. This path should
+     * be stored in the directoryPathStr attribute.
      * 
      * Note that this directory should contain only files that match the type
      * handled by the registered data plugin.
      * 
-     * @param string The path to the local directory containing the data
      * @throws IOException
      */
-    void uploadData(String directoryPath) throws IOException;
+    void uploadData() throws IOException;
 
     /**
      * Conduct the entity-sentiment analysis and get the visualization.
      * 
-     * @return An HTML string of the generated visualization
+     * @return File path to visualization image file returned by visualization plugin
      * @throws Exception
      */
     String getAnalyzedVisualization() throws Exception;
