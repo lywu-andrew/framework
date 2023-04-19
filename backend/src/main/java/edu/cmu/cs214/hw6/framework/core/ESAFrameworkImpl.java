@@ -57,6 +57,10 @@ public class ESAFrameworkImpl implements ESAFramework {
         return directoryPathStr;
     }
 
+    public void setDirectoryPathStr(String path) {
+        directoryPathStr = path;
+    }
+
     /**
      * Registers a new {@link DataPlugin} with the framework
      */

@@ -28,8 +28,9 @@ public class AppState {
     private static Cell[] getDataCells(ESAFramework f) {
         List<DataPlugin> dataPlugins = f.getDataPlugins();
         DataPlugin currDP = f.getCurrDataPlugin();
-        Cell[] cells = new Cell[dataPlugins.size()];
-        for (int i = 0; i < dataPlugins.size(); i++) {
+        int len = dataPlugins.size();
+        Cell[] cells = new Cell[len];
+        for (int i = 0; i < len; i++) {
             String name = dataPlugins.get(i).getPluginName();
             boolean selected = false;
             if (currDP != null) selected = name.equals(currDP.getPluginName());
@@ -41,8 +42,9 @@ public class AppState {
     private static Cell[] getVisCells(ESAFramework f) {
         List<VisualizationPlugin> visPlugins = f.getVisPlugins();
         VisualizationPlugin currVP = f.getCurrVisPlugin();
-        Cell[] cells = new Cell[visPlugins.size()];
-        for (int i = 0; i < visPlugins.size(); i++) {
+        int len = visPlugins.size();
+        Cell[] cells = new Cell[len];
+        for (int i = 0; i < len; i++) {
             String name = visPlugins.get(i).getPluginName();
             boolean selected = false;
             if (currVP != null) selected = name.equals(currVP.getPluginName());
@@ -70,7 +72,7 @@ public class AppState {
                     {
                         "dataCells": %s,
                         "visCells": %s,
-                        "imgPath": %s
+                        "imgPath": "%s"
                     }
                    """.formatted(Arrays.toString(this.dataCells), Arrays.toString(this.visCells), 
                                 this.imgPath);
@@ -108,7 +110,7 @@ class Cell {
             {
                 "name": "%s",
                 "selected": %b,
-                "i": %d,
+                "i": %d
             }
             """.formatted(this.name, this.selected, this.i);
     }

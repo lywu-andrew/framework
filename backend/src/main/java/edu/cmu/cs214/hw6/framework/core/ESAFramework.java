@@ -17,6 +17,8 @@ public interface ESAFramework {
 
     public String getDirectoryPathStr();
 
+    public void setDirectoryPathStr(String path);
+
     /**
      * Registers a new {@link DataPlugin} with the framework
      * 

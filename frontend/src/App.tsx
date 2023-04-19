@@ -75,7 +75,7 @@ class App extends React.Component<Props, State> {
   }
 
   createCell(cell: Cell, index: number, type: string): React.ReactNode {
-    if (cell.selected)
+    if (!cell.selected)
       return (
         <div key={index}>
           <a href='/' onClick={this.play(cell.i, type)}>
@@ -87,6 +87,23 @@ class App extends React.Component<Props, State> {
       return (
         <div key={index}><BoardCell cell={cell}></BoardCell></div>
       )
+  }
+
+  changeDirectory() : React.MouseEventHandler {
+    /**
+    const pathInput = document.getElementById('pathInput');
+    if (pathInput !== null) {
+      const path = pathInput.value;
+      return async (e) => {
+        // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
+        e.preventDefault();
+        const response = await fetch(`/changedirectory?s=${path}`)
+        const json = await response.json();
+        this.setState(json);
+      }
+    }
+    */
+    return async (e) => {};
   }
 
   getImage() : React.ReactNode {
@@ -136,6 +153,11 @@ class App extends React.Component<Props, State> {
         </div> 
         <div id="bottombar">
           <button onClick={/* get the function, not call the function */this.newApp}>New App</button>
+          <label>
+            Path to texts directory:
+            <input name="path" type="text" id="pathInput" />
+          </label>
+          <button onClick={this.changeDirectory}>Change directory</button>
         </div>
       </div>
     );

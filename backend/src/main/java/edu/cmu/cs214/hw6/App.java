@@ -61,11 +61,14 @@ public class App extends NanoHTTPD {
                 framework.registerVisPlugin(p);
             }
         } else if (uri.equals("/dataplugin")) {
-            // e.g., /selectData?i=i
+            // e.g., /dataplugin?i=i
             framework.selectDataPlugin(Integer.parseInt(params.get("i")));
         } else if (uri.equals("/visplugin")) {
-            // e.g., /selectVis?i=i
+            // e.g., /visplugin?i=i
             framework.selectVisPlugin(Integer.parseInt(params.get("i")));
+        } else if (uri.equals("/changedirectory")) {
+            // e.g., /changedirectory?s=path
+            framework.setDirectoryPathStr(params.get("s"));
         }
         if (framework.getCurrDataPlugin() != null && framework.getCurrVisPlugin() != null && framework.getDirectoryPathStr() != null) {
             try {
@@ -76,7 +79,6 @@ public class App extends NanoHTTPD {
             }
         }
         AppState state = AppState.forApp(this.framework);
-        System.out.println(state.toString());
         return newFixedLengthResponse(state.toString());
     }
 
