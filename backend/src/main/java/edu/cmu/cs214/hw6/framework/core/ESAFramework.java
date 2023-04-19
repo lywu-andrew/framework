@@ -1,8 +1,19 @@
 package edu.cmu.cs214.hw6.framework.core;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface ESAFramework {
+
+    public DataPlugin getCurrDataPlugin();
+
+    public VisualizationPlugin getCurrVisPlugin();
+
+    public List<DataPlugin> getDataPlugins();
+
+    public List<VisualizationPlugin> getVisPlugins();
+
+    public String getImgPath();
 
     /**
      * Upload all of the files in the given local directory path.

@@ -14,20 +14,45 @@ import com.google.cloud.language.v1.LanguageServiceClient;
 import com.google.cloud.language.v1.Document.Type;
 
 public class ESAFrameworkImpl implements ESAFramework {
+
     private List<DataPlugin> registeredDataPlugins;
     private DataPlugin currDataPlugin;
     private List<VisualizationPlugin> registeredVisPlugins;
     private VisualizationPlugin currVisPlugin;
     private List<String> texts;
+    private String imgPath;
     
     public ESAFrameworkImpl() {
-        registeredVisPlugins = new ArrayList<VisualizationPlugin>();
         registeredDataPlugins = new ArrayList<DataPlugin>();
+        registeredVisPlugins = new ArrayList<VisualizationPlugin>();
+        currDataPlugin = null;
+        currVisPlugin = null;
         texts = new ArrayList<String>();
+        imgPath = null;
+    }
+
+    public DataPlugin getCurrDataPlugin() {
+        return currDataPlugin;
+    }
+
+    public VisualizationPlugin getCurrVisPlugin() {
+        return currVisPlugin;
+    }
+
+    public List<DataPlugin> getDataPlugins() {
+        return registeredDataPlugins;
+    }
+
+    public List<VisualizationPlugin> getVisPlugins() {
+        return registeredVisPlugins;
+    }
+
+    public String getImgPath() {
+        return imgPath;
     }
 
     /**
-     * Registers a new {@link DataPlugin} with the framework
+     * Changes the current {@link DataPlugin} in the framework
      */
     public void registerDataPlugin(DataPlugin plugin) {
         plugin.onRegister(this);
@@ -37,9 +62,22 @@ public class ESAFrameworkImpl implements ESAFramework {
     /**
      * Registers a new {@link VisualizationPlugin} with the framework
      */
+    public void selectDataPlugin(int index) {
+        if (index < 0 || index >= registeredDataPlugins.size()) return;
+        else currDataPlugin = registeredDataPlugins.get(index);
+    }
+
+    /**
+     * Changes the current {@link VisualizationPlugin} in the framework
+     */
     public void registerVisPlugin(VisualizationPlugin plugin) {
         plugin.onRegister(this);
         registeredVisPlugins.add(plugin);
+    }
+
+    public void selectVisPlugin(int index) {
+        if (index < 0 || index >= registeredVisPlugins.size()) return;
+        else currVisPlugin = registeredVisPlugins.get(index);
     }
 
     /**
@@ -66,7 +104,8 @@ public class ESAFrameworkImpl implements ESAFramework {
     @Override
     public String getAnalyzedVisualization() throws Exception {
         List<AnalyzeEntitySentimentResponse> responses = analyzeTexts();
-        return currVisPlugin.visualizeData(responses);
+        imgPath = currVisPlugin.visualizeData(responses);
+        return imgPath;
     }
 
     /**
