@@ -18,6 +18,6 @@ public class BarChartPluginTest {
 
     @Test
     public void testBarChartVisualization() {
-        
+
     }
 }

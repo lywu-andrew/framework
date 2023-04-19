@@ -11,6 +11,7 @@ public interface ESAFramework {
      * handled by the registered data plugin.
      * 
      * @param string The path to the local directory containing the data
+     * @throws IOException
      */
     void uploadData(String directoryPath) throws IOException;
 

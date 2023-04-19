@@ -24,6 +24,6 @@ public interface DataPlugin {
      * @param framework The {@link ESAFramework} instance with which
      *                  the plug-in was registered.
      */
-    void onRegister(ESAFrameworkImpl framework);
+    void onRegister(ESAFramework framework);
 
 }
