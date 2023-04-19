@@ -1,2 +1,2 @@
-edu.cmu.cs.cs214.hw6.plugin.TxtPlugin
-edu.cmu.cs.cs214.hw6.plugin.PdfPlugin
+edu.cmu.cs.cs214.hw6.plugin.data.TxtPlugin
+edu.cmu.cs.cs214.hw6.plugin.data.PdfPlugin

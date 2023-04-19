@@ -1,4 +1,4 @@
-package edu.cmu.cs214.hw6.plugin;
+package edu.cmu.cs214.hw6.plugin.data;
 
 import java.io.IOException;
 import java.nio.file.Files;

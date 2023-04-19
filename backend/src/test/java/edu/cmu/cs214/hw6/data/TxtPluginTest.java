@@ -1,13 +1,13 @@
-package edu.cmu.cs214.hw6;
+package edu.cmu.cs214.hw6.data;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import org.apache.commons.text.RandomStringGenerator;
+import edu.cmu.cs214.hw6.plugin.data.TxtPlugin;
 
-import edu.cmu.cs214.hw6.plugin.TxtPlugin;
+import org.apache.commons.text.RandomStringGenerator;
 
 import static org.junit.Assert.*;
 

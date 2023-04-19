@@ -1,11 +1,9 @@
-package edu.cmu.cs214.hw6;
+package edu.cmu.cs214.hw6.data;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
-import edu.cmu.cs214.hw6.plugin.PdfPlugin;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +19,8 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
+
+import edu.cmu.cs214.hw6.plugin.data.PdfPlugin;
 
 /**
  * Unit tests for PdfPlugin
