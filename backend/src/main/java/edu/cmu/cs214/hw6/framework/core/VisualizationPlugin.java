@@ -7,6 +7,8 @@ import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
 
 public interface VisualizationPlugin {
 
+    static final String IMG_DIRECTORY = "src/main/java/edu/cmu/cs214/hw6/plugin/charts/";
+
     /**
      * Gets the name of the visualization plugin.
      */

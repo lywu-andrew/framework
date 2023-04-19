@@ -43,10 +43,9 @@ public class BarChartPlugin implements VisualizationPlugin {
             }
         }
         JFreeChart barChart = ChartFactory.createBarChart("Entity Salience", "Entities", "Salience value", dataset);
-        String path = "src/main/java/edu/cmu/cs214/hw6/plugin/charts/";
-        File imgFile = new File(String.join("", path, PLUGIN_NAME, ".jpeg"));
+        File imgFile = new File(String.join("", IMG_DIRECTORY, PLUGIN_NAME, ".jpeg"));
         ChartUtils.saveChartAsJPEG(imgFile, barChart, 600, 400);
-        return String.join("", path, imgFile.getName());
+        return String.join("", IMG_DIRECTORY, imgFile.getName());
     }
 
     /**
