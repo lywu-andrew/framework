@@ -3,7 +3,8 @@
   background-color: #2196F3;
   padding: 10px;
   cursor: pointer;
-  width: 25%
+  float: left;
+  width: 30%;
 }
 
 .cell {
@@ -11,9 +12,9 @@
   border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 20px;
   font-size: 30px;
-  height: 11vmin;
+  height: 100px;
+  vertical-align: baseline;
   text-align: center;
-  float: left;
 }
 
 #right-bar {
@@ -21,7 +22,8 @@
   background-color: #2196F3;
   padding: 10px;
   cursor: pointer;
-  width: 25%
+  float: right;
+  width: 30%;
 }
 
 .cell {
@@ -31,7 +33,6 @@
   font-size: 30px;
   height: 11vmin;
   text-align: center;
-  float: right;
 }
 
 #img {
@@ -39,6 +40,21 @@
   margin-left: auto;
   margin-right: auto;
   width: 40%;
+}
+
+#img button {
+  height: 5vh;
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 1.2vw;
+  cursor: pointer;
 }
 
 #bottombar {
@@ -50,9 +66,13 @@
   /* height: 100%; */
   margin: 0;
   padding: 0;
-  position: relative;
-  float: left;
-  font-size: 2vw
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 2vw;
+  cursor: pointer;
 }
 
 html,

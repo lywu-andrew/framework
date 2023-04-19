@@ -59,7 +59,7 @@ class App extends React.Component<Props, State> {
       return async (e) => {
         // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
         e.preventDefault();
-        const response = await fetch(`/selectData?i=${i}`)
+        const response = await fetch(`/dataplugin?i=${i}`)
         const json = await response.json();
         this.setState(json);
       }
@@ -67,7 +67,7 @@ class App extends React.Component<Props, State> {
       return async (e) => {
         // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
         e.preventDefault();
-        const response = await fetch(`/selectVis?i=${i}`)
+        const response = await fetch(`/visplugin?i=${i}`)
         const json = await response.json();
         this.setState(json);
       }
@@ -132,7 +132,7 @@ class App extends React.Component<Props, State> {
           {this.state.visCells.map((cell, i) => this.createCell(cell, i, 'vis'))}
         </div>
         <div id="img">
-          {this.getImage()}
+          <button onClick={this.getImage}>Get Visualization</button>
         </div> 
         <div id="bottombar">
           <button onClick={/* get the function, not call the function */this.newApp}>New App</button>
