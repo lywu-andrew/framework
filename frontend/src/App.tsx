@@ -25,7 +25,7 @@ interface Props { }
  */
 class App extends React.Component<Props, State> {
   private initialized: boolean = false;
-  private inputPath: string = '';
+  private inputPath: string = ''; // assuming the root path is frontend folder
 
   /**
    * @param props has type Props
