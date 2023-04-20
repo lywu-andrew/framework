@@ -104,7 +104,7 @@ class App extends React.Component<Props, State> {
   getImage() : React.ReactNode {
       if (this.state.imgPath == null) return;
       else return (
-        <img className="visualization" src={require("../../backend" + this.state.imgPath)} alt={"visualization"}></img>
+        <img className="visualization" src={require("../../backend/" + this.state.imgPath)} alt={"visualization"}></img>
       )
   }
 
