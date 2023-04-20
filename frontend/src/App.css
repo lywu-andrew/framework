@@ -1,0 +1,99 @@
+#left-bar {
+  display: grid;
+  position: relative;
+  background-color: #2196F3;
+  padding: 10px;
+  cursor: pointer;
+  float: left;
+  width: 25%;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 1.4em
+}
+
+.cell {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 40px;
+  vertical-align: baseline;
+  text-align: center;
+}
+
+#right-bar {
+  display: grid;
+  position: relative;
+  background-color: #2196F3;
+  padding: 10px;
+  cursor: pointer;
+  float: right;
+  width: 25%;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 1.4em
+}
+
+.cell {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 40px;
+  height: 50%;
+  text-align: center;
+}
+
+#img {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 47%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 40%;
+}
+
+#bottombar {
+  height: 5vh;
+}
+
+#bottombar button {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 98%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.8vw;
+  cursor: pointer;
+}
+
+label {
+  font-size: 15px;
+  font-weight: 400;
+  position: absolute;
+  top: 92%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.input {
+  padding: 3px;
+  font-size: 15px;
+  font-weight: 400;
+  width: 300px;
+  position: absolute;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.selected { background-color: red;}
