@@ -144,7 +144,7 @@ class App extends React.Component<Props, State> {
           {this.state.visCells.map((cell, i) => this.createCell(cell, i, 'vis'))}
         </div>
         <div id="img">
-          <button onClick={this.getImage}>Get Visualization</button>
+          {this.getImage()}
         </div> 
         <div id="bottombar">
           <label>
