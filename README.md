@@ -29,3 +29,26 @@ npm start
 ```
 
 This will start the front-end server at http://localhost:3000. You can update the front-end code as the server is running in the development mode (i.e., npm start). It will automatically recompile and reload.
+
+## Set Up GCloud
+
+This is a critical step necessary in order to make Google Cloud Natural Language API Calls.
+
+1. Install gcloud: follow https://stackoverflow.com/a/52438247 until step 7
+2. Get Google Cloud Platform API credentials in JSON: https://www.youtube.com/watch?v=rWcLDax-VmM
+3. In your Google Cloud console (https://console.cloud.google.com/), navigate to your project and search for “Cloud Natural Language API”.
+4. Click “Enable” and set up a free trial (must provide billing information).
+5. Set your environmental variable: use the path to the JSON file you downloaded from step 2 and run the following command in your terminal.
+
+```
+$ export GOOGLE_APPLICATION_CREDENTIALS=“<your_path”
+```
+It will look something like
+```
+$ export GOOGLE_APPLICATION_CREDENTIALS=“/Users/sunnyliang/Downloads/hw6-esa-framework-project-823d94c3d2c3.json
+```
+Verify this worked by running the following
+```
+$ echo $GOOGLE_APPLICATION_CREDENTIALS
+```
+6. Now you are ready to make API calls
