@@ -25,6 +25,7 @@ interface Props { }
  */
 class App extends React.Component<Props, State> {
   private initialized: boolean = false;
+  private inputPath: string = '';
 
   /**
    * @param props has type Props
@@ -34,7 +35,7 @@ class App extends React.Component<Props, State> {
     /**
      * state has type State as specified in the class inheritance.
      */
-    this.state = { dataCells: [], visCells: [], imgPath: null}
+    this.state = { dataCells: [], visCells: [], imgPath: null }
   }
 
   /**
@@ -89,22 +90,11 @@ class App extends React.Component<Props, State> {
       )
   }
 
-  changeDirectory() : React.MouseEventHandler {
-    /**
-    const pathInput = document.getElementById('pathInput');
-    if (pathInput !== null) {
-      const path = pathInput.value;
-      return async (e) => {
-        // prevent the default behavior on clicking a link; otherwise, it will jump to a new page.
-        e.preventDefault();
-        const response = await fetch(`/changedirectory?s=${path}`)
-        const json = await response.json();
-        this.setState(json);
-      }
+  uploadPath = async () => {
+      const response = await fetch(`/changedirectory?s=${this.inputPath}`)
+      const json = await response.json();
+      this.setState(json);
     }
-    */
-    return async (e) => {};
-  }
 
   getImage() : React.ReactNode {
       if (this.state.imgPath == null) return;
@@ -152,12 +142,11 @@ class App extends React.Component<Props, State> {
           <button onClick={this.getImage}>Get Visualization</button>
         </div> 
         <div id="bottombar">
-          <button onClick={/* get the function, not call the function */this.newApp}>New App</button>
           <label>
             Path to texts directory:
-            <input name="path" type="text" id="pathInput" />
+            <input name="path" type="text" defaultValue={this.inputPath} onChange={evt => this.inputPath = evt.target.value}/>
           </label>
-          <button onClick={this.changeDirectory}>Change directory</button>
+          <button onClick={this.uploadPath}>Change directory</button>
         </div>
       </div>
     );

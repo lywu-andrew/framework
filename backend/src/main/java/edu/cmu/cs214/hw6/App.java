@@ -72,7 +72,7 @@ public class App extends NanoHTTPD {
         }
         if (framework.getCurrDataPlugin() != null && framework.getCurrVisPlugin() != null && framework.getDirectoryPathStr() != null) {
             try {
-                framework.uploadData(); // how to input text directory...
+                framework.uploadData();
                 framework.getAnalyzedVisualization();
             } catch (Exception e) {
                 e.printStackTrace();
