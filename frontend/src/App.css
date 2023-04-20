@@ -6,6 +6,9 @@
   cursor: pointer;
   float: left;
   width: 25%;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 1.4em
 }
 
 .cell {
@@ -25,6 +28,9 @@
   cursor: pointer;
   float: right;
   width: 25%;
+  text-align: center;
+  border: 1px solid black;
+  font-size: 1.4em
 }
 
 .cell {

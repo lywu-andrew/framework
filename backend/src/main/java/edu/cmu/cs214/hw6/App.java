@@ -50,7 +50,7 @@ public class App extends NanoHTTPD {
     public Response serve(IHTTPSession session) {
         String uri = session.getUri();
         Map<String, String> params = session.getParms();
-        if (uri.equals("/newapp")) { // will remove this later, used to debug for now
+        if (uri.equals("/newapp")) {
             this.framework = new ESAFrameworkImpl();
             dataPlugins = loadDataPlugins();
             for (DataPlugin p: dataPlugins){

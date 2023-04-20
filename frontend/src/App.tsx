@@ -90,6 +90,11 @@ class App extends React.Component<Props, State> {
       )
   }
 
+  /**
+   * Use arrow function, i.e., () => {} to create an async function,
+   * otherwise, 'this' would become undefined in runtime. This is
+   * just an issue of Javascript.
+   */
   uploadPath = async () => {
       const response = await fetch(`/changedirectory?s=${this.inputPath}`)
       const json = await response.json();
@@ -132,10 +137,10 @@ class App extends React.Component<Props, State> {
      */
     return (
       <div>
-        <div id="left-bar">
+        <div id="left-bar"> Data Plugins
           {this.state.dataCells.map((cell, i) => this.createCell(cell, i, 'data'))}
         </div>
-        <div id="right-bar">
+        <div id="right-bar"> Visualization Plugins
           {this.state.visCells.map((cell, i) => this.createCell(cell, i, 'vis'))}
         </div>
         <div id="img">
