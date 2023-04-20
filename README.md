@@ -8,6 +8,8 @@ The visualizeData method's only parameter is a list of [AnalyzeEntitySentimentRe
 
 The list of AnalyzeEntitySentimentResponse objects are ordered based on the order of texts in the directory.
 
+There are some sample Visualization Plugins in the plugin/visualization folder. These plugins make use of 3rd party library JFreeChart to generate visualization images.
+
 ## Before Running the Program
 
 1. Create a project in [Google Cloud](https://console.cloud.google.com/) and enable the Cloud Natural Language API, which requires a billing account.
