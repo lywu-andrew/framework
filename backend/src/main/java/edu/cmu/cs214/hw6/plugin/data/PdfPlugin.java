@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import edu.cmu.cs214.hw6.framework.core.DataPlugin;
-import edu.cmu.cs214.hw6.framework.core.ESAFramework;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -14,8 +13,6 @@ import org.apache.pdfbox.text.PDFTextStripper;
 public class PdfPlugin implements DataPlugin {
     private final String PLUGIN_NAME = "pdf";
     
-    private ESAFramework framework;
-
     /**
      * Gets the name of the data plugin.
      */
@@ -47,16 +44,4 @@ public class PdfPlugin implements DataPlugin {
         return text;
     }
 
-    /**
-     * Called (only once) when the plug-in is first registered with the
-     * framework, giving the plug-in a chance to perform any initial set-up
-     * before the game has begun (if necessary).
-     *
-     * @param framework The {@link ESAFramework} instance with which
-     *                  the plug-in was registered.
-     */
-    @Override
-    public void onRegister(ESAFramework f) {
-        framework = f;
-    }
 }

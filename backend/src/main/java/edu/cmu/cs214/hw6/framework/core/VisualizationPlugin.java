@@ -22,14 +22,4 @@ public interface VisualizationPlugin {
      */
     String visualizeData(List<AnalyzeEntitySentimentResponse> result) throws IOException;
 
-    /**
-     * Called (only once) when the plug-in is first registered with the
-     * framework, giving the plug-in a chance to perform any initial set-up
-     * before the game has begun (if necessary).
-     *
-     * @param framework The {@link ESAFramework} instance with which
-     *                  the plug-in was registered.
-     */
-    void onRegister(ESAFramework framework);
-
 }

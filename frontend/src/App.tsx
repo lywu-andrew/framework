@@ -103,9 +103,12 @@ class App extends React.Component<Props, State> {
 
   getImage() : React.ReactNode {
       if (this.state.imgPath == null) return;
-      else return (
-        <img className="visualization" src={require("../../backend/" + this.state.imgPath)} alt={"visualization"}></img>
-      )
+      else {
+        console.log("got image");
+        return (
+          <img className="visualization" src={require("../../backend/" + this.state.imgPath)} alt={"visualization"}></img>
+        )
+      }
   }
 
   /**
@@ -137,22 +140,37 @@ class App extends React.Component<Props, State> {
      */
     return (
       <div>
-        <div id="left-bar"> Data Plugins
+
+        <h3>
+          Entity-Sentiment Analysis Visualization
+        </h3>
+
+        <div id="bar"> Data Plugins
           {this.state.dataCells.map((cell, i) => this.createCell(cell, i, 'data'))}
         </div>
-        <div id="right-bar"> Visualization Plugins
+
+        <br/>
+
+        <div id="bar"> Visualization Plugins
           {this.state.visCells.map((cell, i) => this.createCell(cell, i, 'vis'))}
         </div>
+
+        <br/>
+
+        <label>
+          Path to local directory of texts:
+          <input name="path" type="text" defaultValue={this.inputPath} onChange={evt => this.inputPath = evt.target.value}/>
+        </label>
+
+        <br/>
+
+        <button onClick={this.uploadPath}>Submit</button>
+        <p>Make sure that all of the files in the provided directory<br/>are all of the file type selected above. Run `ls -a` in<br/>your terminal to make sure!</p>
+
         <div id="img">
           {this.getImage()}
-        </div> 
-        <div id="bottombar">
-          <label>
-            Path to texts directory:
-            <input name="path" type="text" defaultValue={this.inputPath} onChange={evt => this.inputPath = evt.target.value}/>
-          </label>
-          <button onClick={this.uploadPath}>Change directory</button>
         </div>
+        
       </div>
     );
   }
