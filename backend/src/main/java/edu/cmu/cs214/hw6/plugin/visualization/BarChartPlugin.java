@@ -14,13 +14,10 @@ import org.jfree.chart.ChartUtils;
 import com.google.cloud.language.v1.AnalyzeEntitySentimentResponse;
 import com.google.cloud.language.v1.Entity;
 
-import edu.cmu.cs214.hw6.framework.core.ESAFramework;
 import edu.cmu.cs214.hw6.framework.core.VisualizationPlugin;
 
 public class BarChartPlugin implements VisualizationPlugin {
     private final String PLUGIN_NAME = "barchart";
-
-    private ESAFramework framework;
 
     /**
      * Gets the name of the visualization plugin.
@@ -57,16 +54,4 @@ public class BarChartPlugin implements VisualizationPlugin {
         return String.join("", IMG_DIRECTORY, imgFile.getName());
     }
 
-    /**
-     * Called (only once) when the plug-in is first registered with the
-     * framework, giving the plug-in a chance to perform any initial set-up
-     * before the game has begun (if necessary).
-     *
-     * @param framework The {@link ESAFramework} instance with which
-     *                  the plug-in was registered.
-     */
-    @Override
-    public void onRegister(ESAFramework f) {
-        framework = f;
-    }
 }

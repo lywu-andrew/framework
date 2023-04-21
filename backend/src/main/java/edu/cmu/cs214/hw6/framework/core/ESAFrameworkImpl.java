@@ -65,7 +65,6 @@ public class ESAFrameworkImpl implements ESAFramework {
      * Registers a new {@link DataPlugin} with the framework
      */
     public void registerDataPlugin(DataPlugin plugin) {
-        plugin.onRegister(this);
         registeredDataPlugins.add(plugin);
     }
 
@@ -83,7 +82,6 @@ public class ESAFrameworkImpl implements ESAFramework {
      * Registers a new {@link VisualizationPlugin} with the framework
      */
     public void registerVisPlugin(VisualizationPlugin plugin) {
-        plugin.onRegister(this);
         registeredVisPlugins.add(plugin);
     }
 

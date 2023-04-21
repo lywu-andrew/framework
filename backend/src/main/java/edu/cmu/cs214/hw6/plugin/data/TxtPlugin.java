@@ -5,13 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import edu.cmu.cs214.hw6.framework.core.DataPlugin;
-import edu.cmu.cs214.hw6.framework.core.ESAFramework;
 
 public class TxtPlugin implements DataPlugin {
     private final String PLUGIN_NAME = "txt";
     
-    private ESAFramework framework;
-
     /**
      * Gets the name of the data plugin.
      */
@@ -30,16 +27,4 @@ public class TxtPlugin implements DataPlugin {
         return content;
     }
 
-    /**
-     * Called (only once) when the plug-in is first registered with the
-     * framework, giving the plug-in a chance to perform any initial set-up
-     * before the game has begun (if necessary).
-     *
-     * @param framework The {@link ESAFramework} instance with which
-     *                  the plug-in was registered.
-     */
-    @Override
-    public void onRegister(ESAFramework f) {
-        framework = f;
-    }
 }
