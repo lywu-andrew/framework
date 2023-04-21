@@ -7,6 +7,8 @@ This framework incorporates machine learning by aggregating the processed text f
 ## Data Plugin
 THe main method in the data plugin is `convertToString`. The job of this function is to convert the contents of a single given file into a String. The parameter of this method is of the type `Path` from the Java NIO package. The `Path` object can be easily converted to a `File` object, as necessary.
 
+There are some sample Visualization Plugins in the `plugin/data` folder. `PDFPlugin` utilizes the Java PDFBox Library to parse a PDF file, and `TxtPlugin` utilizes the Java NIO Library to parse a TXT file.
+
 Register a new data plugin by adding the path to the plugin to `/backend/src/main/resources/META-INF/services/edu.cmu.cs214.hw6.framework.core.DataPlugin`.
 
 ## Visualization Plugin
@@ -14,11 +16,13 @@ The main method in the visualization plugin is `visualizeData`. The only paramet
 
 Note that the list of `AnalyzeEntitySentimentResponse` objects are ordered based on the order of texts in the directory.
 
+There are some sample Visualization Plugins in the `plugin/visualization` folder. These plugins make use of 3rd party library JFreeChart to generate visualization images.
+
 Register a new visualization plugin by adding the path to the plugin to `/backend/src/main/resources/META-INF/services/edu.cmu.cs214.hw6.framework.core.VisualizationPlugin`.
 
 ## Set Up GCloud
 
-This is a critical step necessary in order to make Google Cloud Natural Language API Calls.
+Before running the program, this is a critical step necessary in order to make Google Cloud Natural Language API Calls.
 
 ### TLDR Steps
 
