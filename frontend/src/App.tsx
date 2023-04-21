@@ -158,7 +158,7 @@ class App extends React.Component<Props, State> {
         <br/>
 
         <label>
-          Path to directory of texts:
+          Path to local directory of texts:
           <input name="path" type="text" defaultValue={this.inputPath} onChange={evt => this.inputPath = evt.target.value}/>
         </label>
 
