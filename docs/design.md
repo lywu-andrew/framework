@@ -1,144 +1,184 @@
-# HW6a Project Design
+# Design
+
+Design decisions and structures for Homework 6: Data Visualization Framework
+
+---
 
 ## Domain
-The framework domain our team chose was text entity sentiment analysis. Entity sentiment analysis aims to determine sentiment of different entities identified in a text. Our framework will be using the [Google Cloud Natural Language API](https://cloud.google.com/natural-language/docs/analyzing-entity-sentiment#language-entity-sentiment-string-java), which is a web API that uses NLP to process text and provide insight on key factors such as sentiment, salience, etc. In particular, we plan to make API requests to the method for analyzing entity sentiment. 
 
-Similar to the example in Appendix A, the framework will receive text from different sources provided by the data plugins, perform entity sentiment analysis on the selected texts, and display the data results with different visualizations provided by the visualization plugins.
+Our domain is in image processing. The idea is to take an image and create color themes based on the image.
+The framework extracts different colors from different sources (provided by data plugins) and outputs a list of colors in
+different formats (using visualization plugins). The core of the framework takes a list of colors that represents the colors of the input
+image and outputs a list of specific colors that represents the theme of the image. This allows for reuse and extensibility.
+Any plugin just needs to convert any source into a list of colors and the input it into the framework. Plugins that manage
+visuals only need to process a list of colors that represent the theme of the input colors.
 
-### Data Plugin Examples
-Data plugins can provide a list of text fragments with corresponding time stamps. For example, some possibilities include:
-* File extension plugins that read textual data from .pdf or .txt files
-* Yelp plugin that takes in Yelp review comments for a specific restaurant or business, or all of a user's Yelp reviews using their handle with the Yelp API
-* Lyric plugin that takes songs and takes lyric text data using the Musixmatch API
+Data plugins that could convert sources into colors could include:
 
-### Visualization Plugin Examples
-Visualization plugins can provide the entity sentiment analysis (list of entities, each salience score, content, magnitude) of a list of text fragments with corresponding time stamps. The visualization plugin can specify which aspects of the analysis to visualize. For example, some possibilities include:
-* Bar charts comparing salience/sentiment of the different entities in different text articles. More specifically, one aspect could be the salience of voter participation in political articles from different news companies.
-* Word cloud with the identified entities. One implementation of the plugin could take in the top 20 entities with the highest salience and display them according to their score. It’s also possible to generate a word cloud according to sentiment scores.
+- Converts an image format like .png/jpeg into a list of colors to input into the framework core
+- Gets an image from a URL and converts it into a list of colors to input into the framework core
+- Converts and image in a non-standard format like .pdf into a list of colors to input into the framework core
+
+Visualization plugins that could process the output of the framework core could include:
+
+- Visualize the list of colors on the color wheel with hex and rgb values
+- A template website that uses the list of colors from the framework core
+- Generates an image with the given colors as a theme using a ML algorithm like stable diffusion
+
+---
 
 ## Generality vs. Specificity
-Our framework performs the entity sentiment analysis by itself, which encourages reusability for all kinds of text data from any source. Thus, there is a large variety of uses for this text analysis framework with any generic text input. For users, this grants more flexibility in how the data plugins are implemented, since they only need to provide the text in a format for the framework to properly read. In addition, this allows reuse between different data and visualization plugins as well. Our decision to choose entity sentiment analysis is based on the versatility of text, which makes our framework both generic enough to all types of text and also specific enough to make meaningful visualizations for each type of text.
 
-The general flow of the whole text entity sentiment analysis process is as follows:
-* The data plugin cleans up text from a specific source and passes it to the framework.
-* The framework receives the text data and performs entity sentiment analysis with Google’s Natural Language API, creating analysis results.
-* The visualization plugin uses the analysis results to generate a visualization of selected aspects of the entity sentiment analysis.
+### Generality:
 
-To use this framework, the user needs to provide data and visualization plugins to specify what texts they would like analyzed and what visualizations they want to display. After running the program, they will be presented with a GUI which allows them to render specific pairings of data plugins with visualization plugins (can be mixed and matched).
+The extensibility of the framework is very high. The only thing that people need to add onto the framework is to turn input sources
+into a list of colors. This could be from images, videos, even sound. If there is a creative way of turning something into a list of
+colors, then the framework is able to interpret it and output a theme of colors. The default of the framework however is to take an
+image and convert it into a list of colors which can easily be done either manually or by using APIs.
 
-Our design includes abstractions to organize the data input and API response. Text is a data class that contains the string text from the data source and the datetime the text was created. AnalysisResult is a data class containing the entity sentiment analysis results for a Text; it closely mirrors the Google Cloud API response in order to simplify the process of converting from JSON object to Java objects. See the Plugin interfaces section for specifics more on these abstraction types.
+The generality of the framework is very high. It can theoretically take any input (that can be turned into a list of colors through plugins)
+and output a theme related to it. Even though this can be done, the results may not be meaningful.
 
-These abstractions are specific and meaningful in order to facilitate efficiency and understandability for the users. For example, Text is an abstraction to fulfill standardization of the texts’ format, so they can be uniformly passed into the framework. Since these classes limit the input text type and the user only needs to understand 2 main concepts, this decision supports the design principle of cohesion and minimizing conceptual weight. In addition, the names are very intuitive, which satisfies the design principle of naming. This design is extensible because the simple plugin interfaces and clearly-defined input and output types make it easy for users to make their own plugins with minimal documentation required. This design is also flexible because the simple interfaces allow for very different data sources (from a single txt file to Twitter API calls for tweets across time) and for very different visualizations (from comparing sentiment of a single entity over time to comparing salience of many entities in a single text).
+### Specificity:
 
-## Project structure
-We organized this project based on the structure of recitation 9’s repository. Our project is separated into backend and frontend, with the core functionality of the framework and plugins in the backend. Within the backend src/main folder, we’ve separated the framework, plugins, and tests to be in different packages.
+Even though the generality is really high, the results of the vast and broad areas of inputs that are allowed through plugins may not be
+logical or meaningful. It would be equivalent to putting a laptop in a cooking pan. Even though you can theoretically do it, the results
+from it wouldn't be meaningful. The specificity of our framework is specifically dealing with images or even sound and text. Anything that
+can logically be turned into a list of colors can be used for our framework.
 
-The framework interface and implementation are in the framework.core package, while data objects needed for GUI rendering are in the framework.gui package. In addition, both plugin interfaces will also be in the framework.core package. The data and visualization plugins are separated in the plugin package, and those contain implementations of the plugin interfaces from the user. These plugins use files in the texts package which control most of the external API calls made by users and clean the text data for the plugin to return. The key abstractions, the Text and AnalysisResult classes, used by data and visualization plugins are in the framework.core.types package.
+Even though the framework's generality is high, it's specificity may be even higher. We are dealing specifically with image processing or
+theme processing, information that can generate a color theme.
 
-To register plugins to the framework, the folder resources/META-INF/services contains a file which lists all the plugins that the framework will use. After the framework is instantiated, it’ll call registerPlugin on each plugin to load the plugins into the framework.
+---
 
-Below is a picture of the project structure:
+## Project Structure
 
-![alt text.](/images/organization.png "This is the project structure.")
+The data plugins are backend plugins, implemented in Java. The visualization plugins are frontend plugins, implemented in Svelte, which contains both TypeScript and HTML.
 
-## Plugin interfaces
+### Root directory
 ```
-public interface DataPlugin {
+hw6-analytics-framework-yiningd-yihey-jasonkwo
+```
+This is also the root directory of this Git repository.
 
-    /**
-     * Gets the name of the data plugin.
-     */
-    String getPluginName();
+### Backend logic organization
+```
+hw6Backend
+    | edu.cmu.cs214.hw6Backend
+        | App.java
+        | framework
+            | core
+                | ColorFramework.java
+                | ColorFrameworkImpl.java
+                | ColorOutput.java
+                | DataPlugin.java
+                | ImageData.java
+                | RgbPixel.java
+            | gui
+                | ColorFrameworkState.java
+                | ColorOutputValues.java
+        | plugin
+            | dataPlugins
+                | <Sample data plugin files> 
+```
+Classes related to the framework will be located at the `edu.cmu.cs214.hw6Backend.framework` package.
 
-    /**
-     * Gets a list of the texts.
-     */
-    List<Text> getTexts();
+- The core framework structure is located at `edu.cmu.cs214.hw6Backend.framework.core`.
+- The framework interface is defined in `edu.cmu.cs214.hw6Backend.framework.core`.
+- The data plugin interface is defined in `edu.cmu.cs214.hw6Backend.framework.core`.
+- The helper classes for the UI are defined in `edu.cmu.cs214.hw6Backend.framework.gui`.
 
+Data plugins will be located at `edu.cmu.cs214.hw6Backend.plugin.dataPlugins`.
+
+### Frontend logic organization
+```
+hw6Frontend
+    | public
+    | index.html
+    | <package and config files>
+    | src
+        | app.css
+        | App.svelte
+        | main.ts
+        | vite-env.d.ts
+        | assets
+            | <SVG assets for display purposes>
+        | plugins
+            | <Sample visualization plugin files>
+        | lib
+            | ColorFramework.ts
+            | ColorFrameworkImpl.ts
+            | Data.svelte
+            | Theme.svelte
+```
+The core framework structure is located at `hw6Frontend/src` and `hw6Frontend/src/lib`.
+
+There is no defined visualization plugin interface, but the plugin themselves should be placed `hw6Frontend/src/plugins`.
+
+### Object Model
+
+**Backend**
+
+![object-model-backend](https://user-images.githubusercontent.com/72016126/232850940-4ae5f9e4-76fd-4b4a-973e-991192ddd232.png)
+
+**Communication with the Frontend**
+
+The backend will send a JSON to the frontend:
+
+```
+{
+    "dataURI": "<data URI generated by data plugin>",
+    "fileTypes": ["<supported type of data plugin 1>", "<supported type of data plugin 2>"],
+    "numColors": 10,
+    "output": <string version of ColorOutputValue>
 }
 ```
-For the DataPlugin interface, the important method is getTexts() which is called by the framework to get the Text objects containing the specific texts from the plugin. Note that this interface specifically allows for multiple texts in order to allow users to compare the analyses. 
 
-```
-public interface VisualizationPlugin {
+**Frontend**
 
-    /**
-     * Gets the name of the visualization plugin.
-     */
-    String getPluginName();
+<img width="283" alt="Screenshot 2023-04-18 at 12 48 35" src="https://user-images.githubusercontent.com/72016126/232851549-0dadef3d-26aa-4020-9924-68a7dc911fcb.png">
 
-    /**
-     * Visualizes the given data using the visualization type.
-     * @param data The results of entity sentiment analysis
-     * @return An HTML string of the generated visualization
-     */
-    String visualizeData(AnalysisResult analysisResult);
+---
 
-}
-```
-For the VisualizationPlugin interface, the important method is visualizeData(AnalysisResult analysisResult) which visualizes the results in a chart and returns an HTML string.
+## Plugin Interfaces
 
-As discussed earlier, we created data classes which abstract the types required to pass between the data plugin, framework, and visualization plugin. 
-```
-public class Text {
-    private String content;
-    private LocalDateTime datetime;
+### Data Plugins
 
-    public Text(String content, LocalDateTime datetime) {
-        this.content = content;
-        this.datetime = datetime;
-    }
+The DisplayPlugin interface contains six methods: onRegister(), isValidFileType(), convertFileToDataURI(), convertFileToImage(), getSupportedFileType(), and getPluginName(). These are the only methods the framework will attempt to call.
 
-    /**
-     * Gets the content of this text.
-     */
-    public String getContent() {
-        return this.content;
-    }
+<img width="591" alt="plugin-interface" src="https://user-images.githubusercontent.com/72016126/232850862-c2fec099-c95f-46cb-95b1-6b830a333eff.png">
 
-    /**
-     * Gets the datetime.
-     */
-    public LocalDateTime getDatetime() {
-        return this.datetime;
-    }
-}
-```
-Text is used for data plugins.
+**1. onRegister(framework: ColorFramework): void**
+- The main purpose of this method is to grant the concrete plugin implementation a reference to the framework.
+- This is the only opportunity for the DataPlugin to get access to the framework. Save the framework as a private field if your plugin plans on using the framework's public functions in the future.
 
-```
-public class AnalysisResult {
-    private Entity[] entities;
-}
+**2. isValidFileType(filePath: String): boolean**
+- This function is used for checking whether a certain plugin is suitable for the input file. The check should be based on the file's extension name and the type of file this plugin can handle. For example, a PNGDataPlugin should only return `true` for files with extension name ".png".
+- The input "filePath" is a string of the absolute path of this file. User can call the framework's static method `ColorFramework.getFileExtension(filePath)` to parse the string and get the extension name.
 
-public class Entity {
-    private String name;
-    private String type;
-    private float salience;
-    private List<Mention> mentions;
-    private Sentiment sentiment;
-}
+**3. convertFileToDataURI(filePath: String): String**
+- This function takes in the file's absolute path and should return a dataURI string which contains the image the user want to send back to the frontend for display.
+- The resulting dataURI is in the form `"data:<file type>;base64,<data in base 64>"` (e.g. `"data:image/jpeg;base64,<data in base 64>"`). The contents in `<>` are the image bytes in base 64 string.
 
-public class Sentiment {
-    private float magnitude;
-    private float score;
-}
+**4. convertFileToImage(filePath: String): ImageData**
+- This function takes in the file's absolute path and should return an object of type `ImageData`.
+- The user should create an `ImageData` instance based on the file located at the input file path.
 
-public class Mention {
-    private int beginOffset;
-    private Sentiment sentiment;
-}
-```
-AnalysisResult is the result of the entity sentiment analysis, and it is the input for the visualization plugin. It contains other descriptive classes: Entity, Sentiment, Mention. Each Entity has an overall salience, overall salience, and a list of mentions and their sentiments. The classes do not have constructors, getters, or setters because this may make it easier to convert JSON objects to Java objects.
+**5. getSupportedFileType(): String**
+- This function should return the standard extension name string this data plugin supports. For example, ".png", ".jpg", etc. 
+- The return string MUST be in the format ".xxx" or ".xxxx", as it will be used in the plugin selection process when a file is uploaded.
+- This string must be unique to the plugin, and it shouldn't be changed during execution.
 
-![alt text.](/images/analysisresult.png "This is the AnalysisResult object.")
+**6. getPluginName(): String**
+- This function should return a name string related to this data plugin, like "PNG Data Plugin".
+- This name must be unique to the plugin, and it shouldn't be changed during execution.
 
-This UML diagram visualizes the relationships between AnalysisResult, Entity, Sentiment, and Mention.
+### Visualization Plugins
 
-![alt text.](/images/backend.png "This is the backend flow.")
+There's no defined interface for a visualization plugin.
 
-The UML diagram shows how the interfaces, plugins, and framework are connected. Each implemented plugin will have a private field referring to the framework interface which will be used to call framework methods.
+The only requirements are:
 
-![alt text.](/images/flowchart.png "This is the flowchart.")
+1. The plugin should be a `.svelte` file. This file should contain both the script (implemented in ts) and the styling information (HTML elements) for the plugin.
 
-This flowchart shows the general process of the user interacting with the GUI and how the program is connected between backend and frontend through NanoHTTPD.
+2. The plugin's file name should be the desired plugin name. For example, a visualization plugin for a bar chart should be named `BarChart.svelte`. Such a plugin will show up on the web page's upper right corner as a tab named "BarChart".

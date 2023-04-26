@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.slider {
+  margin-top: 50px;
+  margin-bottom: 80px;
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+.slider-text {
+  margin-top: 30px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+.slider-text-sm {
+  margin-bottom: 30px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+.loading-spinner {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 45%;
+  left: 48%;
+}
+
+.dim-screen {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.input-textbox {
+  margin-top: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.25rem;
+  left: 25%;
+  width: 50%;
+  border: 1px solid rgb(185, 193, 206);
+  background-color: rgb(210, 216, 226);
+  color: rgb(79, 84, 137);
+}
+
+.url-error{
+  margin-top: 10px;
+  left: 25%;
+  width: 50%;
+}
+
+.image-error {
+  margin-top: 10px;
+  left: 25%;
+  width: 50%;
+}
+
+.display-output {
+  margin-bottom: 20px;
+}
+
+.title-card{
+  margin-top: 2rem;
+  background-color: rgb(237, 239, 243);
+  height: 50%;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}

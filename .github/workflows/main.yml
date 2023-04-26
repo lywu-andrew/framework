@@ -1,10 +1,9 @@
 # This is a basic workflow to help you get started with Actions
-
 name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the java branch
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -12,14 +11,10 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
+  # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: backend
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -27,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-          
+
       # Checks-out Java
       - uses: actions/setup-java@v2
         with:
@@ -38,41 +33,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      
-      # Identifies all relevant Java files that have been changed in latest commit
-      - name: Change Java
-        uses: tj-actions/changed-files@v13.1
-        id: change-java
-        with:
-          files: |
-            pom.xml
-            **/*.java
 
       # Runs type checker for Java files
       - name: Run on Java files
         run: |
-          timeout 2m mvn -f pom.xml site
-  
-  run-tests:
-    runs-on: ubuntu-latest
+          timeout 2m mvn -f hw6Backend/pom.xml test
+          timeout 2m mvn -f hw6Backend/pom.xml site
 
-    defaults:
-      run:
-        working-directory: backend
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-java@v2
-        with:
-          distribution: microsoft
-          java-version: 17
-
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-
-      - name: Build with Maven
-        run: mvn test
+      # Runs compiler and linter for TS files- name: Run on TS files
+      - name: Run on TS files
+        run: |
+          timeout 2m npm install hw6Frontend/
+          timeout 2m npm run test --prefix hw6Frontend/
