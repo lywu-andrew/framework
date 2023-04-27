@@ -13,3 +13,7 @@ Since both plugins are registered, they automatically load in on start up. No ex
 - Uses 3rd party library JDeli to read in `.heic` files. Since we're using a trial, any uploaded `.heic` file will have a watermark in the GUI display.
 
 ## Visualization Plugin
+
+**Names Plugin**
+- Located `hw6Frontend/src/plugins/Names.svelte`.
+- Uses 3rd party API TheColorAPI to get the name of each color that the framework returns and renders the result as a grid of colors and their names.
