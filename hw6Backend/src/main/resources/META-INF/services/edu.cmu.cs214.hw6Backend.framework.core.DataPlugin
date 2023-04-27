@@ -3,3 +3,5 @@
 # with one plugin per line.
 edu.cmu.cs214.hw6Backend.plugin.dataPlugins.PNGDataPlugin
 edu.cmu.cs214.hw6Backend.plugin.dataPlugins.PDFDataPlugin
+edu.cmu.cs214.hw6Backend.plugin.dataPlugins.JPEGDataPlugin
+edu.cmu.cs214.hw6Backend.plugin.dataPlugins.HEICDataPlugin
