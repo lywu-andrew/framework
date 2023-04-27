@@ -17,3 +17,24 @@ Since both plugins are registered, they automatically load in on start up. No ex
 **Names Plugin**
 - Located `hw6Frontend/src/plugins/Names.svelte`.
 - Uses 3rd party API TheColorAPI to get the name of each color that the framework returns and renders the result as a grid of colors and their names.
+
+## Starting the backend
+
+Go to the `hw6Backend` folder and run in terminal
+
+```
+mvn exec:exec
+```
+
+This will start the Java server at http://localhost:8080.
+
+## Starting the frontend
+
+Go to the `hw6Frontend` folder and run in another terminal window
+
+```
+npm install
+npm run dev
+```
+
+This will start the front-end server at http://localhost:5173.
