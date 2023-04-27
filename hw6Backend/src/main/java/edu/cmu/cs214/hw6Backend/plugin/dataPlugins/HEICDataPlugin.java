@@ -13,8 +13,9 @@ import java.io.IOException;
 
 import java.util.Base64;
 
+import javax.imageio.ImageIO;
+
 import com.idrsolutions.image.JDeli;
-import com.idrsolutions.image.encoder.OutputFormat;
 
 public class HEICDataPlugin implements DataPlugin {
     private static final String SUPPORTED_FILE_TYPE = ".heic";
@@ -54,20 +55,18 @@ public class HEICDataPlugin implements DataPlugin {
         } catch (IOException e) {
             return "";
         } catch (Exception e) {
-            e.printStackTrace();
             return "";
         }
 
         // Attempt to convert to data URI
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         try {
-            JDeli.write(img, OutputFormat.HEIC, bytes);
-            String imageString = "data:image/heic;base64," + Base64.getEncoder().encodeToString(bytes.toByteArray());
+            ImageIO.write(img, "jpg", bytes);
+            String imageString = "data:image/jpg;base64," + Base64.getEncoder().encodeToString(bytes.toByteArray());
             return imageString;
         } catch (IOException e) {
             return "";
         } catch (Exception e) {
-            e.printStackTrace();
             return "";
         }
     }
